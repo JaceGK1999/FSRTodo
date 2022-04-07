@@ -4,10 +4,10 @@ export async function fetchTodos() {
   return checkError(resp);
 }
 
-export async function fetchTodoByUserId(user_id) {
-  const resp = await client.from('todos').select('*').eq('user_id', user_id);
-  return checkError(resp);
-}
+// export async function fetchTodoByUserId(user_id) {
+//   const resp = await client.from('todos').select('*').eq('user_id', user_id);
+//   return checkError(resp);
+// }
 
 export async function createTodo(todo) {
   const resp = await client.from('todos').insert(todo);
