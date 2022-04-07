@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ToDoList({ todos, handleClick }) {
+export default function Todo({ todos, handleClick }) {
   return (
     <ul className="todo-list">
       {todos.map((item) => (
