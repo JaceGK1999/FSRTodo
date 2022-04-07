@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Todo from './Views/Todo';
+import NewTodo from './Views/NewTodo';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(getUser());
@@ -22,6 +23,7 @@ function App() {
           {!currentUser ? <Auth setCurrentUser={setCurrentUser} /> : <Redirect to="/todo" />}
         </Route>
         <Route path="/todo">{currentUser ? <Todo /> : <Redirect to="/" />}</Route>
+        <Route path="/create">{currentUser ? <NewTodo /> : <Redirect to="/" />}</Route>
       </BrowserRouter>
     </div>
   );
