@@ -6,7 +6,7 @@ import { getUser, logout } from './services/user';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import Trial from './Views/Trial';
+import Todo from './Views/Todo';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(getUser());
@@ -19,9 +19,9 @@ function App() {
       <BrowserRouter>
         <Header handleLogout={handleLogout} currentUser={currentUser} />
         <Route exact path="/">
-          {!currentUser ? <Auth setCurrentUser={setCurrentUser} /> : <Redirect to="/trial" />}
+          {!currentUser ? <Auth setCurrentUser={setCurrentUser} /> : <Redirect to="/todo" />}
         </Route>
-        <Route path="/trial">{currentUser ? <Trial /> : <Redirect to="/" />}</Route>
+        <Route path="/todo">{currentUser ? <Todo /> : <Redirect to="/" />}</Route>
       </BrowserRouter>
     </div>
   );

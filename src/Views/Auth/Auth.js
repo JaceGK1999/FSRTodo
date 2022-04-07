@@ -14,7 +14,7 @@ export function Auth({ setCurrentUser }) {
     try {
       const resp = await signInUser(email, password);
       setCurrentUser(resp.email);
-      history.push('/trial');
+      history.push('/todo');
     } catch (error) {
       setError(e.message);
     }
@@ -25,7 +25,7 @@ export function Auth({ setCurrentUser }) {
     try {
       const resp = await signUpUser(email, password);
       setCurrentUser(resp.email);
-      history.push('/trial');
+      history.push('/todo');
     } catch (error) {
       setError(e.message);
     }
