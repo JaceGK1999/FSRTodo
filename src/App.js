@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Views/Header/Header';
+import { Auth } from './Views/Auth/Auth';
+import { BrowserRouter } from 'react-router-dom';
+import { getUser, logout } from './services/user';
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Todo from './Views/Todo';
+import NewTodo from './Views/NewTodo';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(getUser());
+
+  const handleLogout = async () => {
+    await logout();
+    setCurrentUser(null);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Header handleLogout={handleLogout} currentUser={currentUser} />
+        <Route exact path="/">
+          {!currentUser ? <Auth setCurrentUser={setCurrentUser} /> : <Redirect to="/todo" />}
+        </Route>
+        <Route path="/todo">{currentUser ? <Todo /> : <Redirect to="/" />}</Route>
+        <Route path="/create">{currentUser ? <NewTodo /> : <Redirect to="/" />}</Route>
+      </BrowserRouter>
     </div>
   );
 }
