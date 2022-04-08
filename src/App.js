@@ -11,6 +11,7 @@ import NewTodo from './Views/NewTodo';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(getUser());
+
   const handleLogout = async () => {
     await logout();
     setCurrentUser(null);
