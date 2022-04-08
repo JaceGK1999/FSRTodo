@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchTodos } from '../services/todo';
+import { fetchTodos, updateTodo } from '../services/todo';
 
 export default function Todo() {
   const [todos, setTodos] = useState([]);
@@ -12,15 +12,18 @@ export default function Todo() {
     fetchTodoData();
   }, []);
 
+  const handleClick = async (item) => {
+    item.complete = !item.complete;
+    await updateTodo(item);
+    const data = await fetchTodos();
+    setTodos(data);
+  };
+
   return (
     <ul className="todo-list">
       {todos.map((item) => (
         <li key={item.id}>
-          <input
-            checked={item.is_complete}
-            type="checkbox"
-            // onChange={() => handleClick(item)}
-          ></input>
+          <input checked={item.complete} type="checkbox" onChange={() => handleClick(item)}></input>
           {item.todo}
         </li>
       ))}
