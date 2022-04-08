@@ -1,8 +1,16 @@
-import React from 'react';
+import { useState } from 'react';
+import { createTodo } from '../services/todo';
 
-export default function NewTodo({ newTodo, setNewTodo, handleSubmit }) {
+export default function NewTodo() {
+  const [newTodo, setNewTodo] = useState('');
+
+  const handleSubmit = async () => {
+    await createTodo({ complete: false, todo: newTodo });
+    setNewTodo('');
+  };
+
   return (
-    <>
+    <div>
       <input
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
@@ -10,6 +18,6 @@ export default function NewTodo({ newTodo, setNewTodo, handleSubmit }) {
         placeholder="Add new task"
       />{' '}
       <button onClick={handleSubmit}>Submit</button>
-    </>
+    </div>
   );
 }

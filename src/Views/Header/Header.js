@@ -10,7 +10,7 @@ export default function Header({ handleLogout, currentUser }) {
             <NavLink to={'/create'}>Create a new todo.</NavLink>
           </li>
           <li>
-            <NavLink to={'/todos'}>Back to your todos.</NavLink>
+            <NavLink to={'/todo'}>Back to your todos.</NavLink>
           </li>
           <li onClick={handleLogout}>Logout</li>
         </ul>
